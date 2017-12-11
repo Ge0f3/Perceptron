@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "library(SPerceptron)\n#declares setosa as -1 and virginica and virsicolor as 1\niris_subset[,4] = 1\niris_subset[iris_subset[,3] == \"setosa\",4] = -1\n#loads x and y values\ndata = iris_subset[,c(1,2)]\nlabel = iris_subset[,4]\nerr<-perceptron(data,label)\nplot( err, type=\"l\", lwd=2, col=\"Blue\", xlab=\"epoch #\", ylab=\"errors\")\n",
+    "created" : 1512941609096.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3565630593",
+    "id" : "619A6666",
+    "lastKnownWriteTime" : 1512953489,
+    "last_content_update" : 1512953489009,
+    "path" : "~/Documents/workspace/programs/R_programs/Package/SPerceptron/R/check.R",
+    "project_path" : "R/check.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

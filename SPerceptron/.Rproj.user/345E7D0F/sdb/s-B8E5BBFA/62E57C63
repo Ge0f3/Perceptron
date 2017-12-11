@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "# Hello, world!\n#\n# This is an edataample function named 'hello'\n# which prints 'Hello, world!'.\n#\n# labelou can learn more about package authoring with RStudio at:\n#\n#   http://r-pkgs.had.co.nz/\n#\n# Some useful kelabelboard shortcuts for package authoring:\n#\n#   Build and Reload Package:  'Cmd + Shift + B'\n#   Check Package:             'Cmd + Shift + E'\n#   Test Package:              'Cmd + Shift + T'\nlibrary(ggplot2)\n#load iris dataset blabel deafult\ndata(iris)\niris1<-data(\"iris\")\n#visualizing Data set\niris1 <- iris[1:100, c(1, 3, 5)]\nnames(iris1) <- c(\"sepal\", \"petal\", \"species\")\nggplot(iris1, aes(x = sepal, y = petal)) +\n  geom_point(aes(colour=species, shape=species), size = 3) +\n  xlab(\"sepal length\") +\n  ylab(\"petal length\") +\n  ggtitle(\"Species vs sepal and petal lengths\")\n#categorizing setosa as -1 and virginica and virsicolor as 1\n#since Perceptron onllabel works on linearllabel separable data\niris_subset = iris[c(1,3,5)]\n\niris_subset[,4] = 1\niris_subset[iris_subset[,3] == \"setosa\",4] = -1\n#loads data and label values\ndata = iris_subset[,c(1,2)]\nlabel = iris_subset[,4]\n\n#loading functions\nWeightVector = function(data){\n  return (rep(0,data+1))\n}\n\n#Function for steap function\nStepFunction = function(data){\n  if (data<0)\n    label = -1\n  else\n    label = 1\n  return (label)\n}\n\n#Function for Relu\nreLU = function(data){\n  relu = max(0,data)\n  return (relu)\n}\n\n#Function for Sigmoid\nSigmoidFunction = function(data){\n  label = 1/(1+exp(-data))\n  return(label)\n}\n\n#Function for Gaussian\nGaussianFunction = function(data){\n  label = exp((-data^2)/2)\n  return (label)\n}\n\n#Function to get the user choice\nUserChoice = function(){\n  cat(\"Enter the Action function \\n 1 - StepFunction \\n 2 - reLU \\n 3 - Sigmoid \\n 4 - Gaussian\\n\")\n  at_func = readline(prompt = \"activation function : \")\n  return(as.integer(at_func))\n}\n\n\n#Function for perceptron with default values for learning rate as 1 and iteration as 10\nperceptron = function(data,label,learning = 2,iter = 10){\n  choice = UserChoice()\n  # initialize weight vector\n  wt = WeightVector(dim(data)[2])\n  # loop over number of epochs niter\n  for (num in 1:iter){\n    # loop through training data set\n    for(i in 1:length(label)){\n      z = sum(wt[2:length(wt)]*as.numeric(data[i,]))+wt[1]\n      if(choice == 1){\n        k = StepFunction(z)\n      }\n      if(choice == 2){\n        k = reLU(z)\n      }\n      if(choice == 3){\n        k = SigmoidFunction(z)\n      }\n      if(choice == 4){\n        k = GaussianFunction(z)\n      }\n\n      change_in_wt = learning * (label[i] - k)*c(1,as.numeric(data[i,]))\n      wt = wt + change_in_wt\n\n    }\n  }\n  # weight to decide between the two classes\n  plot( wt, type=\"l\", lwd=2, col=\"Blue\", xlab=\"epoch #\", ylab=\"errors\")\n  return (wt)\n}\n#checing the function.\nperceptron(data,label)\n",
+    "created" : 1512941547136.000,
+    "dirty" : true,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1592697491",
+    "id" : "62E57C63",
+    "lastKnownWriteTime" : 1512954375,
+    "last_content_update" : 1512955112277,
+    "path" : "~/Documents/workspace/programs/R_programs/Package/SPerceptron/R/Sperceptron.R",
+    "project_path" : "R/Sperceptron.R",
+    "properties" : {
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
